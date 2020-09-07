@@ -1127,10 +1127,11 @@ bool ADPlanner::Search(ADSearchStateSpace_t* pSearchStateSpace, vector<int>& pat
     stats.clear();
     int prevexpands = 0;
     clock_t loop_time;
-    while (pSearchStateSpace->eps_satisfied > final_epsilon &&
-           (clock() - TimeStarted) < MaxNumofSecs * (double)CLOCKS_PER_SEC &&
-               (pSearchStateSpace->eps_satisfied == INFINITECOST ||
-               (clock() - TimeStarted) < repair_time * (double)CLOCKS_PER_SEC))
+    while (pSearchStateSpace->bReevaluatefvals ||
+           (pSearchStateSpace->eps_satisfied > final_epsilon &&
+            (clock() - TimeStarted) < MaxNumofSecs * (double)CLOCKS_PER_SEC &&
+            (pSearchStateSpace->eps_satisfied == INFINITECOST ||
+             (clock() - TimeStarted) < repair_time * (double)CLOCKS_PER_SEC)))
     {
         loop_time = clock();
         //it will be a new search iteration
