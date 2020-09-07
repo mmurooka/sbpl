@@ -9,6 +9,16 @@ set(SBPL_VERSION ${SBPL_MAJOR_VERSION}.${SBPL_MINOR_VERSION}.${SBPL_PATCH_VERSIO
 
 set(CMAKE_BUILD_TYPE Release)
 
+find_package(catkin REQUIRED COMPONENTS
+  )
+
+catkin_package(
+  CATKIN_DEPENDS
+  DEPENDS
+  INCLUDE_DIRS src/include
+  LIBRARIES sbpl
+  )
+
 include_directories(src/include)
 
 add_library(sbpl SHARED
